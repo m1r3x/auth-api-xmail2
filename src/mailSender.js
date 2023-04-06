@@ -21,7 +21,7 @@ const sendEmail = (userEmailAddress, action="validation", otp=0) => {
     emailSubject = 'Email Verification'
     emailContent = `Hi! You have recently registered in our platform.
     Please follow the given link to verify your email:
-    https://urchin-app-5xqlg.ondigitalocean.app/api/auth/verify/${token}
+    http://localhost:443/api/auth/verify/${token}
     
     Thanks!`
 

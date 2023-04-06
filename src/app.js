@@ -167,12 +167,14 @@ app.post("/api/auth/resetpassword", async (req, res) => {
                 //otp is still ok
                 if (result.length > 0) {
                     if(newPassword != confirmPassword){
-                        return res.send({
+                        console.log(newPassword, confirmPassword)
+                        return res.status(400).send({
                             status: "error",
                             message: "Passwords do not match."
                         })
                     }
                     //change user's password
+                    console.log('we are here')
                     const hashedPassword = hashPassword(newPassword.trim())
                     const changePassword = "UPDATE users SET password=? WHERE id=?"
                     db.query(changePassword, [hashedPassword,user[0].id], (err, dbResForPassChange) => {
@@ -194,15 +196,10 @@ app.post("/api/auth/resetpassword", async (req, res) => {
                         }
                         });
     
-                        const token = generateToken(user[0].id);
+                        // const token = generateToken(user[0].id);
                         return res.status(200).send({
                             status: 'success',
-                            data: {
-                                token,
-                                firstname: user[0].firstname,
-                                lastname: user[0].lastname,
-                                email: user[0].email
-                            }
+                            message: "Password reset successful"
                     });
                 })
                 } else {
@@ -263,7 +260,7 @@ app.get("/api/auth/reset/:encodedEmail", async (req, res) => {
             if (err) {
                 return res.status(500).send({
                     status: "error", 
-                    message: err.message
+                    message: "Invalid link"
                 })
             } else {
                 sendEmail(dbRes[0].email, action="reset", otp) 
@@ -276,7 +273,7 @@ app.get("/api/auth/reset/:encodedEmail", async (req, res) => {
         } catch (err){
             return res.status(500).send({
                 status: "error", 
-                message: err.message
+                message: "Invalid link"
             })
         }
 	} catch (e) {

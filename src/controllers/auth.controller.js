@@ -8,28 +8,27 @@ const axios = require('axios');
 
 const url = 'https://email-checker.p.rapidapi.com/verify/v1';
 
-const getEmail = async (email) => {
-    //const email = 'your_email@example.com'; // Replace this with your desired email input method
+// const getEmail = async (email) => {
 
-    const querystring = {
-        email: email,
-    };
+//     const querystring = {
+//         email: email,
+//     };
 
-    const headers = {
-        'X-RapidAPI-Key': process.env.RAPID_API_KEY,
-        'X-RapidAPI-Host': 'email-checker.p.rapidapi.com',
-    };
+//     const headers = {
+//         'X-RapidAPI-Key': process.env.RAPID_API_KEY,
+//         'X-RapidAPI-Host': 'email-checker.p.rapidapi.com',
+//     };
 
-    try {
-        const response = await axios.get(url, { headers: headers, params: querystring });
-        console.log(response.data)
-        if(response.data.status === "valid") return 1
-        else return 0
-    } catch (error) {
-        console.log(error)
-        return 0
-    }
-};
+//     try {
+//         const response = await axios.get(url, { headers: headers, params: querystring });
+//         console.log(response.data)
+//         if(response.data.status === "valid") return 1
+//         else return 0
+//     } catch (error) {
+//         console.log(error)
+//         return 0
+//     }
+// };
 
 
 
@@ -39,7 +38,7 @@ exports.signup = async (req, res) => {
 
     const user = new User(firstname.trim(), lastname.trim(), email.trim(), hashedPassword);
 
-    if(await getEmail(email) === 1){
+    if(1 == 1){
     //create the user 
         User.create(user, (err, data) => {
             if (err) {

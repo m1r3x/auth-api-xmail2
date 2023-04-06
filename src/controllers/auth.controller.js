@@ -16,7 +16,7 @@ const getEmail = async (email) => {
     };
 
     const headers = {
-        'X-RapidAPI-Key': 'ee007d9eddmshde6e8d7f4318d2ep170771jsn3a8e621efd10',
+        'X-RapidAPI-Key': process.env.RAPID_API_KEY,
         'X-RapidAPI-Host': 'email-checker.p.rapidapi.com',
     };
 
@@ -50,7 +50,7 @@ exports.signup = async (req, res) => {
             } else {
                     res.status(201).send({
                         status: "success",
-                        data: "Verification link is sent to your email. Please check your inbox."
+                        message: "Verification link is sent to your email. Please check your inbox."
                     });
                     sendEmail(email)
             }
@@ -60,7 +60,7 @@ exports.signup = async (req, res) => {
 
     return res.status(400).send({
         status: "error",
-        data: "The email address is not a valid email."
+        message: "The email address is not a valid email."
     });
     
 };

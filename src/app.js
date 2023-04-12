@@ -229,7 +229,7 @@ app.post("/api/auth/resetpassword", async (req, res) => {
 })
   
 
-function generateOTP(length = 6) {
+function generateOTP(length = 12) {
     const otp = Array.from({ length }, () => Math.floor(Math.random() * 10)).join('');
     return otp;
 }
@@ -251,7 +251,7 @@ app.get("/api/auth/reset/:encodedEmail", async (req, res) => {
             });
         });
         const otp = generateOTP();
-        const expiresIn = 10 * 60 * 1000; // 10 minutes
+        const expiresIn = 5 * 60 * 1000; // 5 minutes
         const expiresAt = new Date(Date.now() + expiresIn);
 
         const query = "INSERT INTO otps (email, otp, expires_at) VALUES (?, ?, ?)";
